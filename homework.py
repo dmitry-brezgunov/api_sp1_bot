@@ -1,7 +1,7 @@
 import os
+import time
 import requests
 import telegram
-import time
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,6 +10,7 @@ load_dotenv()
 PRACTICUM_TOKEN = os.getenv("PRACTICUM_TOKEN")
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 
 def parse_homework_status(homework):
@@ -30,7 +31,6 @@ def get_homework_statuses(current_timestamp):
 
 
 def send_message(message):
-    bot = telegram.Bot(token=TELEGRAM_TOKEN)
     return bot.send_message(chat_id=CHAT_ID, text=message)
 
 
@@ -48,7 +48,6 @@ def main():
         except Exception as e:
             print(f'Бот упал с ошибкой: {e}')
             time.sleep(5)
-            continue
 
 
 if __name__ == '__main__':
